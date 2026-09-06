@@ -70,7 +70,7 @@ async function requestWithRetry(path, options = {}, retryCount = 0) {
         return requestWithRetry(path, options, retryCount + 1);
       }
       throw new Error(
-        "Backend unavailable. Make sure the ETA simulation server is running on port 3001."
+        "Backend unavailable. Make sure the ETA simulation server is running."
       );
     }
     throw error;

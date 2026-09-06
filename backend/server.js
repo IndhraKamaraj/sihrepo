@@ -6,7 +6,7 @@ const { ALLOWED_EVENTS } = require("./services/etaEngine");
 const { createTrainStore } = require("./services/trainStore");
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -244,18 +244,35 @@ app.post("/api/simulation/speed", (req, res) => {
     handleError(res, error, "Failed to set simulation speed.");
   }
 });
-app.use((req, res) => {
+
+const frontendDist = path.join(__dirname, "..", "frontend", "dist");
+
+// Serve static frontend assets
+app.use(express.static(frontendDist));
+
+// API 404 handler for unmatched /api routes
+app.use("/api", (req, res) => {
   res.status(404).json({ error: `Not found: ${req.method} ${req.path}` });
 });
 
-app.listen(PORT, () => {
+// SPA fallback for all other routes
+app.get("*", (req, res) => {
+  const indexPath = path.join(frontendDist, "index.html");
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).send("Frontend assets not built. Run npm run build.");
+  }
+});
+
+app.listen(PORT, "0.0.0.0", () => {
   if (initError) {
-    console.error(`✗ ETA Intelligence API listening on http://localhost:${PORT}`);
+    console.error(`✗ ETA Intelligence API listening on http://0.0.0.0:${PORT}`);
     console.error(`✗ ERROR: Backend store failed to initialize`);
     console.error(`✗ Details: ${initError.message}`);
     console.error(`✗ Frontend will receive error from /api/health endpoint`);
   } else {
-    console.log(`✓ ETA Intelligence API ready on http://localhost:${PORT}`);
+    console.log(`✓ ETA Intelligence API ready on http://0.0.0.0:${PORT}`);
     console.log(`✓ Data status: Simulation / Demonstration Data`);
     console.log(`✓ Backend initialized successfully`);
     console.log(`✓ Ready to accept requests`);
