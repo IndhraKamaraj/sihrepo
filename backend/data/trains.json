@@ -1,0 +1,225 @@
+{
+  "dataStatus": "Simulation / Demonstration Data",
+  "futureNote": "Real-time railway data integration is planned for future deployment.",
+  "corridor": {
+    "name": "Chennai Central → Coimbatore Junction",
+    "code": "MAS-CBE"
+  },
+  "stations": [
+    {
+      "code": "MAS",
+      "name": "Chennai Central",
+      "scheduledArrival": null,
+      "scheduledDeparture": "14:30",
+      "isOrigin": true,
+      "isDestination": false
+    },
+    {
+      "code": "AJJ",
+      "name": "Arakkonam",
+      "scheduledArrival": "15:23",
+      "scheduledDeparture": "15:25",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "KPD",
+      "name": "Katpadi Junction",
+      "scheduledArrival": "16:13",
+      "scheduledDeparture": "16:15",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "AB",
+      "name": "Ambur",
+      "scheduledArrival": "16:48",
+      "scheduledDeparture": "16:50",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "JTJ",
+      "name": "Jolarpettai",
+      "scheduledArrival": "17:28",
+      "scheduledDeparture": "17:30",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "SLY",
+      "name": "Salem",
+      "scheduledArrival": "17:49",
+      "scheduledDeparture": "17:50",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "MAP",
+      "name": "Mettur Road",
+      "scheduledArrival": "18:09",
+      "scheduledDeparture": "18:10",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "BQI",
+      "name": "Bhavani",
+      "scheduledArrival": "18:29",
+      "scheduledDeparture": "18:30",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "SA",
+      "name": "Salem Junction",
+      "scheduledArrival": "19:12",
+      "scheduledDeparture": "19:15",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "ED",
+      "name": "Erode Junction",
+      "scheduledArrival": "20:10",
+      "scheduledDeparture": "20:15",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "TUP",
+      "name": "Tiruppur",
+      "scheduledArrival": "20:58",
+      "scheduledDeparture": "21:00",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "CBF",
+      "name": "Coimbatore North",
+      "scheduledArrival": "21:39",
+      "scheduledDeparture": "21:40",
+      "isOrigin": false,
+      "isDestination": false
+    },
+    {
+      "code": "CBE",
+      "name": "Coimbatore Junction",
+      "scheduledArrival": "22:20",
+      "scheduledDeparture": null,
+      "isOrigin": false,
+      "isDestination": true
+    }
+  ],
+  "eventDefinitions": {
+    "none": {
+      "id": "none",
+      "label": "No Active Event",
+      "additionalDelayMinutes": 0,
+      "confidencePercent": 90,
+      "impact": "No additional operational delay applied.",
+      "reason": null,
+      "networkCondition": "Normal"
+    },
+    "speed_restriction": {
+      "id": "speed_restriction",
+      "label": "Speed Restriction",
+      "additionalDelayMinutes": 8,
+      "confidencePercent": 82,
+      "impact": "Estimated additional delay of 8 minutes",
+      "reason": "Reduced operating speed on the affected section.",
+      "networkCondition": "Restricted"
+    },
+    "congestion": {
+      "id": "congestion",
+      "label": "Track Congestion",
+      "additionalDelayMinutes": 5,
+      "confidencePercent": 82,
+      "impact": "Estimated additional delay of 5 minutes",
+      "reason": "Downstream congestion is expected to reduce movement efficiency.",
+      "networkCondition": "Congested"
+    },
+    "unexpected_stoppage": {
+      "id": "unexpected_stoppage",
+      "label": "Unexpected Stoppage",
+      "additionalDelayMinutes": 12,
+      "confidencePercent": 78,
+      "impact": "Estimated additional delay of 12 minutes",
+      "reason": "Unexpected operational stoppage adds additional dwell time.",
+      "networkCondition": "Delayed"
+    }
+  },
+  "trains": [
+    {
+      "trainNumber": "12679",
+      "trainName": "CBE Intercity",
+      "primary": true,
+      "source": { "code": "MAS", "name": "Chennai Central" },
+      "destination": { "code": "CBE", "name": "Coimbatore Junction" },
+      "scheduledJourney": { "departure": "14:30", "arrival": "22:20" },
+      "baselineState": {
+        "currentLocationCode": "SA",
+        "currentSpeedKmh": 72,
+        "currentDelayMinutes": 3,
+        "progressToNext": 0.15
+      }
+    },
+    {
+      "trainNumber": "12680",
+      "trainName": "MAS Intercity Demo",
+      "primary": false,
+      "source": { "code": "CBE", "name": "Coimbatore Junction" },
+      "destination": { "code": "MAS", "name": "Chennai Central" },
+      "scheduledJourney": { "departure": "06:10", "arrival": "14:00" },
+      "direction": "reverse",
+      "baselineState": {
+        "currentLocationCode": "ED",
+        "currentSpeedKmh": 68,
+        "currentDelayMinutes": 5,
+        "progressToNext": 0.4
+      }
+    },
+    {
+      "trainNumber": "16617",
+      "trainName": "Coimbatore Express Demo",
+      "primary": false,
+      "source": { "code": "MAS", "name": "Chennai Central" },
+      "destination": { "code": "CBE", "name": "Coimbatore Junction" },
+      "scheduledJourney": { "departure": "15:45", "arrival": "23:35" },
+      "baselineState": {
+        "currentLocationCode": "JTJ",
+        "currentSpeedKmh": 78,
+        "currentDelayMinutes": 0,
+        "progressToNext": 0.55
+      }
+    },
+    {
+      "trainNumber": "22637",
+      "trainName": "West Coast Demo",
+      "primary": false,
+      "source": { "code": "MAS", "name": "Chennai Central" },
+      "destination": { "code": "CBE", "name": "Coimbatore Junction" },
+      "scheduledJourney": { "departure": "13:20", "arrival": "21:10" },
+      "baselineState": {
+        "currentLocationCode": "KPD",
+        "currentSpeedKmh": 64,
+        "currentDelayMinutes": 12,
+        "progressToNext": 0.25
+      }
+    },
+    {
+      "trainNumber": "12623",
+      "trainName": "Trivandrum Mail Demo",
+      "primary": false,
+      "source": { "code": "MAS", "name": "Chennai Central" },
+      "destination": { "code": "CBE", "name": "Coimbatore Junction" },
+      "scheduledJourney": { "departure": "16:05", "arrival": "23:55" },
+      "baselineState": {
+        "currentLocationCode": "AJJ",
+        "currentSpeedKmh": 70,
+        "currentDelayMinutes": 2,
+        "progressToNext": 0.7
+      }
+    }
+  ]
+}
